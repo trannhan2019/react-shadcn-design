@@ -30,7 +30,7 @@ const dataMenu = [
 export default function Header() {
   return (
     <div className="absolute left-0 right-0 top-0 z-10 h-[85px]">
-      <div className="container mx-auto h-full px-4">
+      <div className="container mx-auto h-full px-5">
         <div className="flex h-full w-full justify-between">
           {/* logo-------------------- */}
           <div className="my-4 max-w-[85px]">

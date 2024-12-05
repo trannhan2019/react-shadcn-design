@@ -14,7 +14,7 @@ export default function Banner() {
         backgroundImage: `url(${BgSlide})`,
       }}
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto px-5">
         <div className="flex w-full items-center justify-center lg:w-6/12 lg:justify-start">
           <div className="flex flex-col items-center lg:items-start">
             <motion.span
@@ -30,7 +30,7 @@ export default function Banner() {
               initial={{ x: -50 }}
               whileInView={{ x: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-7 text-7xl font-light text-black/80"
+              className="mb-7 text-center text-5xl font-light text-black/80 md:text-left md:text-7xl"
             >
               BOOKS <span className="font-semibold">COLLECTION</span>
             </motion.h1>
