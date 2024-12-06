@@ -63,6 +63,7 @@ export default {
       },
       fontFamily: {
         poppins: ["Poppins"],
+        roboto: ["Roboto"],
       },
     },
   },

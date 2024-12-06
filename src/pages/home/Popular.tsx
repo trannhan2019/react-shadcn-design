@@ -3,14 +3,15 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
-  CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Link } from "react-router";
+import { motion } from "motion/react";
 
 const data = [
   {
     id: 1,
-    title: "Bạn Đang Ở Đây: Cuốn Sách Ngắn Về Thế Giới",
+    title: "Bạn đang ở đây: Cuốn sách ngắn về thế giới ",
     author: "Nicholas Crane",
     price: "95k",
     description:
@@ -18,7 +19,8 @@ const data = [
     code: "SBA0004",
     location: "Ngăn 1",
     note: "Sách Công ty trang bị",
-    image: "https://www.vinabook.com/images/detailed/360/P91714Escan0001.jpg",
+    image:
+      "https://307a0e78.vws.vegacdn.vn/view/v2/image/img.book/0/0/1/33347.jpg?v=1&w=480&h=700",
   },
   {
     id: 2,
@@ -70,15 +72,28 @@ const data = [
     location: "Ngăn 1",
     note: "Sách Công ty trang bị",
     image:
-      "https://pos.nvncdn.net/fd5775-40602/ps/20191113_K3WqrdfSd489EF0SZElQWcue.jpg",
+      "https://omegaplus.vn/wp-content/uploads/2019/07/5-Copy-1024x1024.jpg",
+  },
+  {
+    id: 6,
+    title: "Lẽ thường",
+    author: "Thomas Paine",
+    price: "109k",
+    description:
+      "Trong Lẽ thường, Thomas Paine phân tích thực trạng, hoàn cảnh và quan hệ của các Thuộc địa đối với nước Anh. Với lý luận chặt chẽ và văn chương nghị luận sắc bén, ông đã giúp cho người dân Mỹ ở thuộc địa nhìn rõ vấn đề và chọn cho mình hướng đi đúng đắn. Tác giả dùng văn phong và từ ngữ giản dị để trình bày những vấn đề phức tạp thuộc về triết học, tôn giáo và chính trị nhằm vào đối tượng chính là đại chúng. Lẽ thường còn ảnh hưởng đến việc soạn thảo Tuyên ngôn Độc lập của Mỹ vào tháng Bảy năm 1776",
+    code: "SBA0075",
+    location: "Ngăn 1",
+    note: "Sách Công ty trang bị",
+    image:
+      "https://down-vn.img.susercontent.com/file/1a7c93ad401e5e97658b829c05ad07f9",
   },
 ];
 
 export default function Popular() {
   return (
-    <div className="py-24">
+    <div className="py-20">
       <div className="container mx-auto p-5">
-        <div className="flex">
+        <div className="flex flex-col">
           {/* START PORTFOLIO HEADING */}
           <div className="w-full">
             <div className="text-center">
@@ -92,7 +107,32 @@ export default function Popular() {
           {/* END PORTFOLIO HEADING */}
 
           {/* START PORTFOLIO IMAGES */}
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+          <motion.div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {data.map((item) => (
+              <Link to={`/detail/${item.id}`} key={item.id}>
+                <motion.div
+                  initial={{ opacity: 0.2, y: 100 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.5 }}
+                >
+                  <Card className="w-full overflow-hidden transition duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                    <CardContent
+                      className="h-[300px] w-full bg-cover bg-center bg-no-repeat"
+                      style={{ backgroundImage: `url(${item.image})` }}
+                    ></CardContent>
+                    <CardFooter className="mt-5 h-[80px] flex-col items-start gap-y-1">
+                      <CardTitle className="font-roboto text-black/80">
+                        {item.title}
+                      </CardTitle>
+                      <CardDescription className="font-roboto text-left">
+                        {item.author}
+                      </CardDescription>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              </Link>
+            ))}
+          </motion.div>
           {/* END PORTFOLIO IMAGES */}
         </div>
       </div>

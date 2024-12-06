@@ -1,0 +1,33 @@
+import BannerImg from "@/assets/img/banner.jpg";
+import { Button } from "@/components/ui/button";
+
+export default function BannerSection() {
+  return (
+    <div
+      className="h-[500px]"
+      style={{
+        backgroundImage: `url(${BannerImg})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="container mx-auto px-5">
+        <div className="w-full py-36 text-center lg:w-6/12 lg:text-left">
+          <span className="font-semibold">TRENDING PRODUCT OF THE WEEK</span>
+          <h1 className="mt-7 text-7xl font-extralight text-black/80">
+            Books <span className="font-semibold text-black">Collections</span>
+          </h1>
+          <p className="mt-7">
+            Aenean imperdiet. Etiam ultricies nisi vel augue men tuhi spectrum
+            alle me
+          </p>
+          <Button className="mt-4 bg-gradient-to-t from-[#62ab00] to-[#a3d600]">
+            BUY NOW
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
