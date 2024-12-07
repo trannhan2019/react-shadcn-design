@@ -107,7 +107,7 @@ export default function Popular() {
           {/* END PORTFOLIO HEADING */}
 
           {/* START PORTFOLIO IMAGES */}
-          <motion.div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {data.map((item) => (
               <Link to={`/detail/${item.id}`} key={item.id}>
                 <motion.div
@@ -121,10 +121,10 @@ export default function Popular() {
                       style={{ backgroundImage: `url(${item.image})` }}
                     ></CardContent>
                     <CardFooter className="mt-5 h-[80px] flex-col items-start gap-y-1">
-                      <CardTitle className="font-roboto text-black/80">
+                      <CardTitle className="text-black/80">
                         {item.title}
                       </CardTitle>
-                      <CardDescription className="font-roboto text-left">
+                      <CardDescription className="text-left">
                         {item.author}
                       </CardDescription>
                     </CardFooter>
@@ -132,7 +132,7 @@ export default function Popular() {
                 </motion.div>
               </Link>
             ))}
-          </motion.div>
+          </div>
           {/* END PORTFOLIO IMAGES */}
         </div>
       </div>

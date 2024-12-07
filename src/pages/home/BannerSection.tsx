@@ -16,7 +16,7 @@ export default function BannerSection() {
       <div className="container mx-auto px-5">
         <div className="w-full py-36 text-center lg:w-6/12 lg:text-left">
           <span className="font-semibold">TRENDING PRODUCT OF THE WEEK</span>
-          <h1 className="mt-7 text-7xl font-extralight text-black/80">
+          <h1 className="mt-7 text-5xl font-extralight text-black/80 md:text-7xl">
             Books <span className="font-semibold text-black">Collections</span>
           </h1>
           <p className="mt-7">

@@ -1,6 +1,6 @@
 import LogoImage from "@/assets/img/logo.png";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-
+import { useWindowScroll } from "@uidotdev/usehooks";
 import {
   Sheet,
   SheetContent,
@@ -11,6 +11,7 @@ import {
 
 import { Menu } from "lucide-react";
 import { Link } from "react-router";
+import { cn } from "@/lib/utils";
 
 const dataMenu = [
   {
@@ -28,8 +29,15 @@ const dataMenu = [
 ];
 
 export default function Header() {
+  const [{ y }] = useWindowScroll();
+
   return (
-    <div className="absolute left-0 right-0 top-0 z-10 h-[85px]">
+    <div
+      className={cn(
+        "absolute left-0 right-0 top-0 z-10 h-[85px]",
+        y !== null && y > 90 && "sticky animate-scroll-show bg-white",
+      )}
+    >
       <div className="container mx-auto h-full px-5">
         <div className="flex h-full w-full justify-between">
           {/* logo-------------------- */}

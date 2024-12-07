@@ -1,3 +1,5 @@
+import { transform } from "typescript";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
@@ -64,6 +66,15 @@ export default {
       fontFamily: {
         poppins: ["Poppins"],
         roboto: ["Roboto"],
+      },
+      keyframes: {
+        "scroll-show": {
+          "0%": { opacity: 0, transform: "translateY(-50px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "scroll-show": "scroll-show 0.7s ease-in-out",
       },
     },
   },
