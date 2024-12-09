@@ -1,24 +1,20 @@
-import Banner from "./Banner";
-import Header from "./Header";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 import Popular from "./Popular";
 import BannerSection from "./BannerSection";
 import BookList from "./BookList";
 import ScrollButton from "./ScrollButton";
-import Footer from "./Footer";
+import Banner from "@/components/home/book/Banner";
 
-export default function Home() {
+export default function Books() {
   useDocumentTitle(`SBA | Book `);
 
   return (
-    <div className="relative scroll-smooth font-roboto">
-      <Header />
+    <div>
       <Banner />
       <Popular />
       <BannerSection />
       <BookList />
       <ScrollButton />
-      <Footer />
     </div>
   );
 }

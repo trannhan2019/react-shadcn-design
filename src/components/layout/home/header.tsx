@@ -16,15 +16,15 @@ import { cn } from "@/lib/utils";
 const dataMenu = [
   {
     title: "HOME",
-    url: "#",
+    url: "/",
   },
   {
     title: "BOOKS",
-    url: "#",
+    url: "/",
   },
   {
     title: "E-BOOKS",
-    url: "#",
+    url: "/ebook",
   },
 ];
 
