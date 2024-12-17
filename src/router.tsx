@@ -1,16 +1,16 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
+import DashboardLayout from "./layouts/dashboard";
+import SharedLayout from "./layouts/shared";
 
-const HomeLayout = lazy(() => import("./components/layout/home"));
-const Book = lazy(() => import("./pages/home/book"));
-const EBook = lazy(() => import("./pages/home/ebook"));
+const Book = lazy(() => import("./pages/shared/book"));
+const EBook = lazy(() => import("./pages/shared/e-book"));
+const Dashboard = lazy(() => import("./pages/dashboard"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeLayout />,
-
-    // loader: () => redirect("/book"),
+    element: <SharedLayout />,
 
     children: [
       {
@@ -18,8 +18,22 @@ const router = createBrowserRouter([
         element: <Book />,
       },
       {
-        path: "ebook",
+        path: "book",
+        element: <Book />,
+      },
+      {
+        path: "e-book",
         element: <EBook />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
       },
     ],
   },
