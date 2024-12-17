@@ -6,6 +6,8 @@ import SharedLayout from "./layouts/shared";
 const Book = lazy(() => import("./pages/shared/book"));
 const EBook = lazy(() => import("./pages/shared/e-book"));
 const Dashboard = lazy(() => import("./pages/dashboard"));
+const CongTy = lazy(() => import("./pages/dashboard/congty"));
+const PhongBan = lazy(() => import("./pages/dashboard/phongban"));
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: "cong-ty",
+        element: <CongTy />,
+      },
+      {
+        path: "phong-ban",
+        element: <PhongBan />,
       },
     ],
   },
