@@ -23,12 +23,12 @@ const items = [
   },
   {
     title: "Công ty",
-    url: "/dashboard/cong-ty",
+    url: "/dashboard/congty",
     icon: Inbox,
   },
   {
     title: "Phòng ban",
-    url: "/dashboard/phong-ban",
+    url: "/dashboard/phongban",
     icon: Calendar,
   },
   {

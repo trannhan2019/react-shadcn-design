@@ -38,11 +38,11 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "cong-ty",
+        path: "congty",
         element: <CongTy />,
       },
       {
-        path: "phong-ban",
+        path: "phongban",
         element: <PhongBan />,
       },
     ],
