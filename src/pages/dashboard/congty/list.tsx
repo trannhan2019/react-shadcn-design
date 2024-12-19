@@ -20,6 +20,7 @@ import { getCongtys } from "@/api/congty";
 import Loading from "@/components/loading";
 import { CongTy } from "@/types/congty";
 import { toast } from "sonner";
+import ListPagination from "./list-pagination";
 
 const ListCongTy = () => {
   const {
@@ -58,8 +59,9 @@ const ListCongTy = () => {
           </TableHeader>
 
           <TableBody>
-            {Array.isArray(congTys?.data) && congTys?.data.length > 0 ? (
-              congTys?.data.map((congTy: CongTy) => (
+            {Array.isArray(congTys?.data?.data) &&
+            congTys?.data?.data?.length > 0 ? (
+              congTys?.data?.data?.map((congTy: CongTy) => (
                 <TableRow key={congTy.id}>
                   <TableCell className="text-sm text-gray-800">
                     {congTy.ten}
@@ -109,6 +111,7 @@ const ListCongTy = () => {
           </TableBody>
         </Table>
       )}
+      <ListPagination />
     </div>
   );
 };
