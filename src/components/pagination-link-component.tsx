@@ -8,6 +8,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { DOTS, usePagination } from "@/hooks/use-pagination";
+import useQueryParams from "@/hooks/use-query-params";
 
 interface PaginationLinkComponentProps {
   totalCount: number;
@@ -29,22 +30,31 @@ export default function PaginationLinkComponent({
     pageSize,
   });
 
+  const { queryObject, updateQueryParams } = useQueryParams();
+
+  const handleChangePage = (page: number) => {
+    updateQueryParams({ ...queryObject, page: page.toString() });
+  };
+
   if (currentPage === 0 || (paginationRange && paginationRange.length < 2)) {
     return null;
   }
 
-  let lastPage = paginationRange && paginationRange[paginationRange.length - 1];
+  const lastPage =
+    paginationRange && paginationRange[paginationRange.length - 1];
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            to={`/dashboard/congty?page=${currentPage - 1}`}
+            onClick={() => handleChangePage(currentPage - 1)}
             aria-disabled={currentPage <= 1}
             tabIndex={currentPage <= 1 ? -1 : undefined}
             className={
-              currentPage <= 1 ? "pointer-events-none opacity-50" : undefined
+              currentPage <= 1
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
             }
           />
         </PaginationItem>
@@ -59,9 +69,9 @@ export default function PaginationLinkComponent({
           }
 
           return (
-            <PaginationItem key={index}>
+            <PaginationItem key={index} className="cursor-pointer">
               <PaginationLink
-                to={`/dashboard/congty?page=${pageNumber}`}
+                onClick={() => handleChangePage(Number(pageNumber))}
                 isActive={pageNumber === currentPage}
               >
                 {pageNumber}
@@ -72,7 +82,7 @@ export default function PaginationLinkComponent({
 
         <PaginationItem>
           <PaginationNext
-            to={`/dashboard/congty?page=${currentPage + 1}`}
+            onClick={() => handleChangePage(currentPage + 1)}
             aria-disabled={lastPage ? currentPage >= Number(lastPage) : false}
             tabIndex={
               lastPage
@@ -85,7 +95,7 @@ export default function PaginationLinkComponent({
               lastPage
                 ? currentPage >= Number(lastPage)
                   ? "pointer-events-none opacity-50"
-                  : undefined
+                  : "cursor-pointer"
                 : undefined
             }
           />

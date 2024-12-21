@@ -22,19 +22,21 @@ import { CongTy } from "@/types/congty";
 import { toast } from "sonner";
 import ListPagination from "./list-pagination";
 import useQueryParams from "@/hooks/use-query-params";
+import SearchInput from "@/components/search-input";
 
 const ListCongTy = () => {
   const { queryObject } = useQueryParams();
   const page = queryObject.page ? Number(queryObject.page) : 1;
   const per_page = queryObject.per_page ? Number(queryObject.per_page) : 10;
+  const search = queryObject.search || "";
   const {
     data: congTys,
     isPending,
     isError,
     error,
   } = useQuery({
-    queryKey: ["congties", page, per_page],
-    queryFn: () => getCongtys({ page, per_page }),
+    queryKey: ["congties", page, per_page, search],
+    queryFn: () => getCongtys({ page, per_page, search }),
     placeholderData: keepPreviousData,
     retry: false,
   });
@@ -53,7 +55,7 @@ const ListCongTy = () => {
 
   return (
     <div>
-      {/* <ListSearch /> */}
+      <SearchInput />
 
       <Table>
         <TableHeader>

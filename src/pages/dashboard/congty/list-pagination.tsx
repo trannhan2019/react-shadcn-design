@@ -23,7 +23,7 @@ export default function ListPagination({
         pageSize={pageSize}
       />
 
-      <SelectPage />
+      <SelectPage defaultValue={pageSize} />
     </div>
   );
 }
