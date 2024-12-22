@@ -6,7 +6,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-// import ListSearch from "./_list-search";
 import { XIcon, CheckIcon, EllipsisVertical, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +22,8 @@ import { toast } from "sonner";
 import ListPagination from "./list-pagination";
 import useQueryParams from "@/hooks/use-query-params";
 import SearchInput from "@/components/search-input";
+import CheckboxTable from "@/components/checkbox-table";
+import { useSelectAll } from "@/hooks/use-select-all";
 
 const ListCongTy = () => {
   const { queryObject } = useQueryParams();
@@ -40,6 +41,9 @@ const ListCongTy = () => {
     placeholderData: keepPreviousData,
     retry: false,
   });
+
+  const { handleSelectAll, handleSelect, isSelectedAll, isSelected } =
+    useSelectAll<CongTy>(congTys?.data?.data);
 
   if (isPending) {
     return (
@@ -60,6 +64,12 @@ const ListCongTy = () => {
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead className="w-10">
+              <CheckboxTable
+                checked={isSelectedAll}
+                updateValue={handleSelectAll}
+              />
+            </TableHead>
             <TableHead>Tên công ty</TableHead>
             <TableHead>Tên viết tắt</TableHead>
             <TableHead>Địa chỉ</TableHead>
@@ -74,6 +84,12 @@ const ListCongTy = () => {
           congTys?.data?.data?.length > 0 ? (
             congTys?.data?.data?.map((congTy: CongTy) => (
               <TableRow key={congTy.id}>
+                <TableCell className="text-sm text-gray-800">
+                  <CheckboxTable
+                    checked={isSelected(congTy.id)}
+                    updateValue={(value) => handleSelect(value, congTy.id)}
+                  />
+                </TableCell>
                 <TableCell className="text-sm text-gray-800">
                   {congTy.ten}
                 </TableCell>
