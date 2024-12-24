@@ -21,7 +21,7 @@ export const addCongty = async (congty: CongTyRequest) => {
   return axios.post(congtyApiUrl, congty);
 };
 
-export const updateCongty = async (congty: CongTyRequest) => {
+export const updateCongty = async (congty: CongTyRequest, id: number) => {
   await csrf();
-  return axios.put(congtyApiUrl, congty);
+  return axios.put(`${congtyApiUrl}/${id}`, congty);
 };

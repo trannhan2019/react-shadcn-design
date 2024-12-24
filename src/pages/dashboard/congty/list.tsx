@@ -6,7 +6,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { XIcon, CheckIcon, EllipsisVertical, Pencil } from "lucide-react";
+import {
+  XIcon,
+  CheckIcon,
+  EllipsisVertical,
+  Pencil,
+  Trash,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,6 +30,8 @@ import useQueryParams from "@/hooks/use-query-params";
 import SearchInput from "@/components/search-input";
 import CheckboxTable from "@/components/checkbox-table";
 import { useSelectAll } from "@/hooks/use-select-all";
+import DeleteAlert from "./delete-alert";
+import { useState } from "react";
 
 const ListCongTy = () => {
   const { queryObject } = useQueryParams();
@@ -42,7 +50,10 @@ const ListCongTy = () => {
     retry: false,
   });
 
-  const { handleSelectAll, handleSelect, isSelectedAll, isSelected } =
+  //delete cong ty
+  const [openAlertDel, setOpenAlertDel] = useState(false);
+
+  const { selected, handleSelectAll, handleSelect, isSelectedAll, isSelected } =
     useSelectAll<CongTy>(congTys?.data?.data);
 
   if (isPending) {
@@ -59,7 +70,17 @@ const ListCongTy = () => {
 
   return (
     <div>
-      <SearchInput />
+      <div className="flex items-center space-x-4">
+        <SearchInput />
+        <Button
+          variant="destructive"
+          className={selected.length > 0 ? "flex" : "hidden"}
+          onClick={() => setOpenAlertDel(true)}
+        >
+          <Trash />
+          <span className="hidden md:flex">Xóa tất cả</span>
+        </Button>
+      </div>
 
       <Table>
         <TableHeader>
@@ -110,7 +131,7 @@ const ListCongTy = () => {
                   )}
                 </TableCell>
                 <TableCell>
-                  <DropdownMenu>
+                  <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="h-8 w-8 p-0">
                         <EllipsisVertical />
@@ -119,6 +140,11 @@ const ListCongTy = () => {
                     <DropdownMenuContent>
                       <DropdownMenuItem>
                         <Pencil />
+                        <span className="ml-4 text-sm">Sửa</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setOpenAlertDel(true)}>
+                        <Trash color="red" />
+                        <span className="ml-4 text-sm">Xóa</span>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -143,6 +169,8 @@ const ListCongTy = () => {
         pageSize={per_page}
         siblingCount={1}
       />
+
+      <DeleteAlert open={openAlertDel} onOpen={setOpenAlertDel} />
     </div>
   );
 };
