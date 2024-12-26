@@ -25,3 +25,13 @@ export const updateCongty = async (congty: CongTyRequest, id: number) => {
   await csrf();
   return axios.put(`${congtyApiUrl}/${id}`, congty);
 };
+
+export const deleteCongty = async (id: number) => {
+  await csrf();
+  return axios.delete(`${congtyApiUrl}/${id}`);
+};
+
+export const deleteCongtys = async (ids: number[]) => {
+  await csrf();
+  return axios.delete(`${congtyApiUrl}/${ids}`);
+};

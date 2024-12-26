@@ -27,5 +27,16 @@ export const useSelectAll = <T extends { id: number }>(data: T[]) => {
     }
   };
 
-  return { selected, handleSelectAll, handleSelect, isSelectedAll, isSelected };
+  const reset = () => {
+    setSelected([]);
+  };
+
+  return {
+    selected,
+    handleSelectAll,
+    handleSelect,
+    isSelectedAll,
+    isSelected,
+    reset,
+  };
 };

@@ -50,11 +50,30 @@ const ListCongTy = () => {
     retry: false,
   });
 
+  const [congty, setCongty] = useState<CongTy | null>(null);
+
   //delete cong ty
   const [openAlertDel, setOpenAlertDel] = useState(false);
+  const [deleteType, setDeleteType] = useState<"single" | "multiple">("single");
+  const handleOpenAlertDelSingle = (congty: CongTy) => {
+    setOpenAlertDel(true);
+    setDeleteType("single");
+    setCongty(congty);
+  };
+  const handleOpenAlertDelMultiple = () => {
+    setOpenAlertDel(true);
+    setDeleteType("multiple");
+  };
 
-  const { selected, handleSelectAll, handleSelect, isSelectedAll, isSelected } =
-    useSelectAll<CongTy>(congTys?.data?.data);
+  //select cong ty
+  const {
+    selected,
+    handleSelectAll,
+    handleSelect,
+    isSelectedAll,
+    isSelected,
+    reset,
+  } = useSelectAll<CongTy>(congTys?.data?.data);
 
   if (isPending) {
     return (
@@ -68,6 +87,8 @@ const ListCongTy = () => {
     toast.error(error.message);
   }
 
+  // console.log(selected);
+
   return (
     <div>
       <div className="flex items-center space-x-4">
@@ -75,7 +96,7 @@ const ListCongTy = () => {
         <Button
           variant="destructive"
           className={selected.length > 0 ? "flex" : "hidden"}
-          onClick={() => setOpenAlertDel(true)}
+          onClick={() => handleOpenAlertDelMultiple()}
         >
           <Trash />
           <span className="hidden md:flex">Xóa tất cả</span>
@@ -142,7 +163,9 @@ const ListCongTy = () => {
                         <Pencil />
                         <span className="ml-4 text-sm">Sửa</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setOpenAlertDel(true)}>
+                      <DropdownMenuItem
+                        onClick={() => handleOpenAlertDelSingle(congTy)}
+                      >
                         <Trash color="red" />
                         <span className="ml-4 text-sm">Xóa</span>
                       </DropdownMenuItem>
@@ -170,7 +193,15 @@ const ListCongTy = () => {
         siblingCount={1}
       />
 
-      <DeleteAlert open={openAlertDel} onOpen={setOpenAlertDel} />
+      <DeleteAlert
+        open={openAlertDel}
+        onOpen={setOpenAlertDel}
+        type={deleteType}
+        ids={selected}
+        congty={congty}
+        reset={reset}
+        setCongty={setCongty}
+      />
     </div>
   );
 };
